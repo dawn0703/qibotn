@@ -1,0 +1,7 @@
+batch_wall_s,mode,repeat,success_count,total_cases
+17.83109173923731,separate_processes,1,7,7
+18.300837315618992,separate_processes,2,7,7
+17.97023294866085,separate_processes,3,7,7
+3.7316542342305183,persistent_process,1,7,7
+3.1974400728940964,persistent_process,2,7,7
+4.116784483194351,persistent_process,3,7,7

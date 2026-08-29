@@ -1,0 +1,19 @@
+ASC Selection Homework - QiboTN
+
+Cloud provider: AutoDL
+Paid cloud resource: Yes
+
+CPU model: Intel Xeon Platinum 8481C
+Container CPU quota: 25 CPU-equivalents
+Host logical CPUs visible: 224
+cpu.max: 2500000 100000
+
+Container memory limit: 90.00 GiB
+Swap limit: 0
+
+OS: Ubuntu 22.04.5 LTS
+Python: 3.12.3
+
+Physical GPU: NVIDIA GeForce RTX 4090 24GB
+GPU used in QiboTN benchmark: No
+CUDA_VISIBLE_DEVICES=""

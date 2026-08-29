@@ -1,0 +1,5 @@
+workload,qubits,reference,candidate,reference_runtime_s,qibotn_runtime_s,max_abs_error,correct
+QFT,4,qibojit-numba-cpu,qibotn-quimb-cpu,1.5760385617613792,0.1411343365907669,2.7755575615628914e-16,True
+QFT,6,qibojit-numba-cpu,qibotn-quimb-cpu,2.9664367958903313,0.11288685351610184,5.967448757360216e-16,True
+QFT,8,qibojit-numba-cpu,qibotn-quimb-cpu,5.0777047500014305,0.056173503398895264,3.7470027081099033e-16,True
+QFT,10,qibojit-numba-cpu,qibotn-quimb-cpu,7.65115712583065,0.19475315511226654,2.3245294578089215e-16,True

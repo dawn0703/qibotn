@@ -1,0 +1,8 @@
+[{'architecture': 'SkylakeX',
+  'filepath': '/root/autodl-tmp/asc-selection/qibotn/.venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so',
+  'internal_api': 'openblas',
+  'num_threads': 25,
+  'prefix': 'libscipy_openblas',
+  'threading_layer': 'pthreads',
+  'user_api': 'blas',
+  'version': '0.3.29'}]

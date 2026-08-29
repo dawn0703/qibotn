@@ -1,0 +1,30 @@
+===== FDU repository =====
+origin	https://github.com/FDU-SC/QiboTN-optimized.git (fetch)
+origin	https://github.com/FDU-SC/QiboTN-optimized.git (push)
+
+===== Commit =====
+c3de307154e5a06d984e37135872fd1e5a2e83fa
+
+===== Top-level files =====
+./.git/HEAD
+./.git/config
+./.git/description
+./.git/index
+./.git/packed-refs
+./.git/shallow
+./.gitignore
+./LICENSE
+./code_modification_explanation.md
+./workload-qaoa/qaoa.dat
+./workload-qaoa/run.log
+./workload-qft/qft.dat
+./workload-qft/run.log
+./workload-supremacy/run.log
+./workload-supremacy/supremacy.dat
+
+===== C++ files =====
+./src/qibotn/cpp/CMakeLists.txt
+./src/qibotn/cpp/setup.py
+./src/qibotn/cpp/src/bindings.cpp
+./src/qibotn/cpp/src/mps_simulator.cpp
+./src/qibotn/cpp/src/mps_simulator.hpp
