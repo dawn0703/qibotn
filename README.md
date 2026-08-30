@@ -1,6 +1,22 @@
-# Qibotn
+## ASC Selection Homework Submission QiboTN
 
-> **ASC 选拔作业：** 本仓库的大题 4 实验说明、性能结果与复现方法见 [SUBMISSION.md](SUBMISSION.md)。
+### Submission Materials
+
+- **Full submission description, experimental environment, and reproduction instructions:** [SUBMISSION.md](SUBMISSION.md)
+- **Experiment scripts:** [`asc_homework/scripts/`](asc_homework/scripts/)
+- **Raw and summarized results:** [`asc_homework/results/`](asc_homework/results/)
+- **Experiment plots:** [`asc_homework/plots/`](asc_homework/plots/)
+- **Environment and runtime logs:** [`asc_homework/logs/`](asc_homework/logs/)
+
+> All graded performance experiments were conducted on CPU only. A GPU was physically available on the machine but was not used in any graded experiment.
+>
+> The optimizations in this submission are primarily at the workflow and system levels. The final approximately 13× improvement refers to the end-to-end performance of the same QFT batch workload, rather than a 13× speedup of a single tensor-network numerical kernel.
+>
+> Publicly available optimization work, including FDU-SC's QiboTN optimization project, was studied only as a reference for further investigation and is not counted as part of the original optimization results in this submission.
+
+---
+
+## Upstream QiboTN
 
 The tensor network translation module for Qibo to support large-scale simulation of quantum circuits and acceleration.
 
