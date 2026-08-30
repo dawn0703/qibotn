@@ -144,56 +144,190 @@ asc_homework/logs/
 
 ## 7. 基本复现方法
 
-推荐使用 Python 3.12。
+推荐使用 Python 3.12，并从仓库根目录执行以下命令。
 
-创建环境：
+### 7.1 创建 Python 虚拟环境
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
+### 7.2 安装实验依赖
 
 安装本实验使用的主要 CPU 依赖：
-python -m pip install qibo==0.3.4 qibojit==0.1.16 quimb==1.15.0 pandas==3.0.5 matplotlib==3.11.1 psutil==5.9.8 threadpoolctl==3.6.0
 
-安装当前 QiboTN checkout：
+```bash
+python -m pip install \
+  qibo==0.3.4 \
+  qibojit==0.1.16 \
+  quimb==1.15.0 \
+  pandas==3.0.5 \
+  matplotlib==3.11.1 \
+  psutil==5.9.8 \
+  threadpoolctl==3.6.0
+```
+
+安装当前仓库中的 QiboTN：
+
+```bash
 python -m pip install -e . --no-deps
+```
 
-禁用 GPU：
+### 7.3 强制使用 CPU
+
+```bash
 export CUDA_VISIBLE_DEVICES=""
+```
 
-正确性验证：
+本实验使用 AutoDL 实例上的 CPU 路径完成所有正式性能测试。机器物理存在 RTX 4090，但评分实验未使用 GPU。
+
+### 7.4 正确性验证
+
+```bash
 python asc_homework/scripts/check_correctness.py
+```
 
-主要 baseline 与优化实验：
+正确性结果保存在：
+
+```text
+asc_homework/results/correctness.csv
+```
+
+小规模 QFT 测试中，QiboTN / Quimb CPU 输出与 Qibojit CPU state-vector reference 在双精度浮点误差范围内一致。
+
+### 7.5 Baseline 与主要优化实验
+
+```bash
 python asc_homework/scripts/overnight_suite.py
+```
 
-任务顺序实验：
+该脚本用于执行主要 QFT baseline 及线程配置、初始化复用、批处理并行等实验。
+
+正式测试覆盖：
+
+```text
+8, 10, 12, 14, 16, 18, 19 qubits
+```
+
+主要性能结果使用重复实验的中位数进行比较。
+
+### 7.6 任务执行顺序实验
+
+```bash
 python asc_homework/scripts/order_sweep.py
+```
 
-最终组合实验：
+对应结果：
+
+```text
+asc_homework/results/order_sweep.csv
+```
+
+实验比较 ascending、descending 和 interleaved 三种任务顺序。
+
+### 7.7 最终组合实验
+
+```bash
 python asc_homework/scripts/final_combined_suite.py
+```
 
-重新生成统计和图表：
+最终组合实验使用相同的 QFT workload 集合重新测量 baseline、persistent process 和不同 worker 数配置，而不是直接将不同优化的局部加速比相乘。
+
+两轮独立复测结果保存在：
+
+```text
+asc_homework/results/final_combined_confirm1.csv
+asc_homework/results/final_combined_confirm2.csv
+```
+
+主实验获得约 13.81× 的端到端批处理加速，两轮独立复测分别约为 13.05× 和 13.25×。
+
+因此本文保守报告约 13× 的端到端 QFT 批处理性能提升。
+
+### 7.8 结果分析与图表生成
+
+重新分析实验结果并生成图表：
+
+```bash
 python asc_homework/scripts/analyze_results.py
+```
 
-重新生成统一结果表：
+实验图表保存在：
+
+```text
+asc_homework/plots/
+```
+
+其中包括：
+
+```text
+baseline_runtime_vs_qubits.png
+threads_vs_runtime.png
+reuse_comparison.png
+batch_speedup.png
+final_combined_runtime.png
+memory_vs_qubits.png
+```
+
+### 7.9 生成统一结果表
+
+```bash
 python asc_homework/scripts/freeze_results.py
+```
 
-完整软件环境还保存在 asc_homework/logs/pip_freeze_initial.txt。
+统一结果表：
+
+```text
+asc_homework/results/results.csv
+```
+
+该文件汇总 baseline、线程调优、初始化复用、任务级并行、任务顺序和最终组合实验的主要结果。
+
+### 7.10 环境与日志记录
+
+完整实验日志位于：
+
+```text
+asc_homework/logs/
+```
+
+Python 软件环境记录：
+
+```text
+asc_homework/logs/pip_freeze_initial.txt
+```
+
+实验脚本位于：
+
+```text
+asc_homework/scripts/
+```
+
+原始结果位于：
+
+```text
+asc_homework/results/
+```
+
+因此仓库保留了实验代码、运行命令、环境信息、关键日志、原始结果和最终汇总结果，可用于复现实验过程。
 
 ## 8. 公开优秀方案调研与局限性
 
-本实验额外研究了 FDU-SC 公开的 QiboTN-optimized 方案，包括 native C++ MPS、Python 热点下沉、Pauli expectation、缓存以及 Cython 等更深入的优化思路。
+本实验额外调研了 FDU-SC 公开的 `QiboTN-optimized` 方案，其中包括原生 C++ MPS、Python 热路径下沉、Pauli expectation、缓存以及 Cython 等更深入的优化方向。
 
-FDU-SC 的成果只作为公开参考和进一步学习方向，不计入本作业的原创优化结果。
+FDU-SC 的相关成果仅作为公开先行工作和进一步学习方向，不计入本作业的原创优化结果。
 
-本作业的主要优化属于 workflow / system level，包括线程配置、初始化复用、任务调度和任务级并行。
+本作业独立完成的主要优化集中在工作流和系统层，包括线程配置、初始化与后端复用、任务调度和任务级并行。
 
 当前实验存在以下局限：
 
-- 按选拔作业要求选择 QFT 作为主要 workload；
-- dense state-vector reconstruction 路径的正式测试规模最大为 19 qubits；
-- 默认 QFT 全零初态对 MPS 表示相对友好；
-- 最终约 13 倍提升主要来自 workflow 层，而非 tensor-network kernel 本身；
+- 按选拔作业要求选择 QFT 作为主要工作负载；
+- 当前稠密状态向量重建路径的正式测试规模最大为 19 个量子比特；
+- 默认 QFT 全零初态的纠缠较低，对 MPS 表示相对友好；
+- 最终约 13 倍提升主要来自工作流和批处理吞吐量优化，而非单个张量网络数值内核；
 - 未完整复现 FDU-SC 的 C++ / Cython / MPI 正式竞赛运行环境。
 
-更深入的 kernel-level 优化可作为后续工作。
+因此，本实验结果不能直接外推到高纠缠的 QAOA、Supremacy 等工作负载。
 
+进一步工作可以从更复杂线路、MPS 键维数、SVD、C++/Eigen、OpenMP、MPI、NUMA、内存带宽和硬件性能计数器等方向继续展开。
