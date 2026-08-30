@@ -1,5 +1,7 @@
 # Qibotn
 
+> **ASC 选拔作业：** 本仓库的大题 4 实验说明、性能结果与复现方法见 [SUBMISSION.md](SUBMISSION.md)。
+
 The tensor network translation module for Qibo to support large-scale simulation of quantum circuits and acceleration.
 
 ## Supported Computation

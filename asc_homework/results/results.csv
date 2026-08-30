@@ -1,0 +1,28 @@
+workload,qubits,experiment,config,timing_scope,runtime_s,speedup,repeats,status,command
+QFT,8,baseline,"BLAS=1, serial",execution_s,0.0922436416149139,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 8
+QFT,10,baseline,"BLAS=1, serial",execution_s,0.1363439187407493,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 10
+QFT,12,baseline,"BLAS=1, serial",execution_s,0.1736360564827919,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 12
+QFT,14,baseline,"BLAS=1, serial",execution_s,0.1995757296681404,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 14
+QFT,16,baseline,"BLAS=1, serial",execution_s,0.2732833549380302,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 16
+QFT,18,baseline,"BLAS=1, serial",execution_s,0.3728827536106109,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 18
+QFT,19,baseline,"BLAS=1, serial",execution_s,0.4381139576435089,1.0,5,success,python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=1,execution_s,0.4342710375785827,1.0,5,success,OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=2,execution_s,0.5358066856861115,0.8104994752398241,5,success,OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=4,execution_s,0.4332511499524116,1.0023540332813499,5,success,OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=8,execution_s,0.4318432584404945,1.0056218988965016,5,success,OPENBLAS_NUM_THREADS=8 OMP_NUM_THREADS=8 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=16,execution_s,0.4351661801338196,0.997942986849388,5,success,OPENBLAS_NUM_THREADS=16 OMP_NUM_THREADS=16 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,19,thread_tuning,threads=24,execution_s,0.5711926743388176,0.7602881778574486,5,success,OPENBLAS_NUM_THREADS=24 OMP_NUM_THREADS=24 python asc_homework/scripts/benchmark_qft.py --qubits 19
+QFT,"8,10,12,14,16,18,19",initialization_reuse,persistent_process,batch_wall_s,3.7316542342305183,4.815621121544339,3,success,asc_homework/scripts/overnight_suite.py
+QFT,"8,10,12,14,16,18,19",initialization_reuse,separate_processes,batch_wall_s,17.97023294866085,1.0,3,success,asc_homework/scripts/overnight_suite.py
+QFT,mixed 12-19,batch_parallelism,"workers=1, BLAS=1",batch_wall_s,25.393441274762157,1.0,3,success,asc_homework/scripts/overnight_suite.py
+QFT,mixed 12-19,batch_parallelism,"workers=2, BLAS=1",batch_wall_s,13.820973806083202,1.83731201802766,3,success,asc_homework/scripts/overnight_suite.py
+QFT,mixed 12-19,batch_parallelism,"workers=4, BLAS=1",batch_wall_s,7.903955817222595,3.2127509138437045,3,success,asc_homework/scripts/overnight_suite.py
+QFT,mixed 12-19,batch_parallelism,"workers=8, BLAS=1",batch_wall_s,5.404164597392082,4.698865257919127,3,success,asc_homework/scripts/overnight_suite.py
+QFT,"8,10,12,14,16,18,19",task_order,ascending,batch_wall_s,6.456703122705221,1.0,8,success,python asc_homework/scripts/order_sweep.py
+QFT,"8,10,12,14,16,18,19",task_order,descending,batch_wall_s,5.957553640007973,1.0837843035680297,8,success,python asc_homework/scripts/order_sweep.py
+QFT,"8,10,12,14,16,18,19",task_order,interleaved,batch_wall_s,6.59186951443553,0.9794949837167881,8,success,python asc_homework/scripts/order_sweep.py
+QFT,"8,10,12,14,16,18,19 x3",final_combined,"baseline_separate_serial, workers=1",batch_wall_s,45.31344770640135,1.0,5,success,python asc_homework/scripts/final_combined_suite.py
+QFT,"8,10,12,14,16,18,19 x3",final_combined,"persistent_parallel_2, workers=2",batch_wall_s,4.577829301357269,9.898457265098651,5,success,python asc_homework/scripts/final_combined_suite.py
+QFT,"8,10,12,14,16,18,19 x3",final_combined,"persistent_parallel_4, workers=4",batch_wall_s,3.653156653046608,12.403915848670623,5,success,python asc_homework/scripts/final_combined_suite.py
+QFT,"8,10,12,14,16,18,19 x3",final_combined,"persistent_parallel_8, workers=8",batch_wall_s,3.2807967886328697,13.811720330683379,5,success,python asc_homework/scripts/final_combined_suite.py
+QFT,"8,10,12,14,16,18,19 x3",final_combined,"persistent_serial, workers=1",batch_wall_s,6.165137566626072,7.3499491644270885,5,success,python asc_homework/scripts/final_combined_suite.py

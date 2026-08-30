@@ -1,0 +1,5 @@
+FDU public optimization reproduction probe
+BUILD_EXIT=1
+
+Full log:
+asc_homework/logs/fdu_build_probe.log
