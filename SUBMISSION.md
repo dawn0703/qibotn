@@ -1,5 +1,42 @@
 # ASC 选拔作业：QiboTN CPU 性能优化
 
+## 提交信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 姓名 | 张嘉 |
+| 年级专业 | 2025级 计算机科学与技术专业 1班 |
+| 对应题目 | 大题 4：QiboTN 量子线路模拟优化 |
+| 仓库 | https://github.com/dawn0703/qibotn |
+| 实验平台 | AutoDL 付费云服务器 |
+| 计算设备 | CPU-only |
+| 完成情况 | 已完成环境部署、Baseline、正确性验证、4 类优化尝试、最终组合优化与独立复测 |
+| 复现方式 | 见本文“基本复现方法”一节及 `asc_homework/scripts/` |
+| 最终结果 | 相同 QFT 批处理任务下约 13× 端到端性能提升 |
+
+### 关键结果与证据
+
+- 统一结果表：`asc_homework/results/results.csv`
+- 正确性结果：`asc_homework/results/correctness.csv`
+- 独立复测结果：`asc_homework/results/final_combined_confirm1.csv`、`asc_homework/results/final_combined_confirm2.csv`
+- 任务顺序实验：`asc_homework/results/order_sweep.csv`
+- 实验图表：`asc_homework/plots/`
+- 环境与运行日志：`asc_homework/logs/`
+- 实验与分析脚本：`asc_homework/scripts/`
+
+### 代码与修改说明
+
+本作业未通过修改 QFT 线路定义、删除核心计算或降低问题难度获得性能提升。
+
+本人的主要优化实现位于 `asc_homework/scripts/`，主要包括线程配置、初始化与后端复用、任务调度、进程级并行及实验自动化等 workflow / system-level 改进。
+
+QiboTN 上游核心数值算法源码未作为本作业的主要修改对象。
+
+仓库中用于调研 FDU-SC 公开 `QiboTN-optimized` 方案的脚本和记录仅作为公开先行工作调研与进一步学习方向，不计入本人的原创性能结果。
+
+---
+
+
 ## 1. 题目说明
 
 本仓库用于完成 ASC 选拔作业大题 4：QiboTN 量子线路模拟优化。
